@@ -1,0 +1,14 @@
+- hosts: all
+  gather_facts: no
+  tasks:
+  - win_domain_membership:
+      dns_domain_name: mobilink.net.pk
+      hostname: Windows_2016
+      domain_admin_user: ansible.int@jazz.com.pk
+      domain_admin_password: 7nvkJ@$#weer5yhk
+      #domain_ou_path: "OU=Windows,OU=Servers,DC=yourdomain,DC=local"
+      state: domain
+    register: domain_state
+
+  - win_reboot:
+    when: domain_state.reboot_required
